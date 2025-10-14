@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Add a New Run</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand MonsterHunterFont">Monster Hunts</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="add.html">Add New Run</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br/>
+
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <!-- Title -->
+            <h2 class="MonsterHunterFont flush">Add a New Run</h2>
+
+            <!-- Image -->
+            <img src="styles/images/rathalos.gif" alt="Add Run Icon" class="add-run-image" />
+        </div>
+
+        <div id="addRunContainer">
+            <!-- Success and Error Banners -->
+            <div id="successBanner" class="alert alert-success">Run successfully added!</div>
+            <div id="errorBanner" class="alert alert-danger">There were errors in your submission. Please fix them and try again.</div>
+
+            <!-- Form Fields -->
+            <div id="addRunContainer">
+                <div class="mb-3">
+                    <label for="game" class="form-label">Game</label>
+                    <input type="text" class="form-control" id="game" placeholder="Enter game">
+                    <div id="gameError" class="alert alert-danger">Game is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="monster_id" class="form-label">Monster ID</label>
+                    <input type="text" class="form-control" id="monster_id" placeholder="Enter monster ID">
+                    <div id="monsterIdError" class="alert alert-danger">Monster ID is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username">
+                    <div id="usernameError" class="alert alert-danger">Username is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="weapon" class="form-label">Weapon</label>
+                    <select class="form-control" id="weapon">
+                        <option value="">Select a Weapon</option>
+                        <option value="Great Sword">Great Sword</option>
+                        <option value="Long Sword">Long Sword</option>
+                        <option value="Sword and Shield">Sword and Shield</option>
+                        <option value="Dual Blades">Dual Blades</option>
+                        <option value="Hammer">Hammer</option>
+                        <option value="Hunting Horn">Hunting Horn</option>
+                        <option value="Lance">Lance</option>
+                        <option value="Gunlance">Gunlance</option>
+                        <option value="Switch Axe">Switch Axe</option>
+                        <option value="Insect Glaive">Insect Glaive</option>
+                        <option value="Charge Blade">Charge Blade</option>
+                    </select>
+                    <div id="weaponError" class="alert alert-danger">Weapon is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="time" class="form-label">Time</label>
+                    <input type="text" class="form-control" id="time" placeholder="HH:MM:SS">
+                    <div id="timeError" class="alert alert-danger">Time is required and must be in HH:MM:SS format.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="rules" class="form-label">Rules</label>
+                    <select class="form-control" id="rules">
+                        <option value="">Select Rules</option>
+                        <option value="TA">TA</option>
+                        <option value="None">None</option>
+                    </select>
+                    <div id="rulesError" class="alert alert-danger">Rules are required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="device" class="form-label">Device</label>
+                    <select class="form-control" id="device">
+                        <option value="">Select a Device</option>
+                        <option value="Console">Console</option>
+                        <option value="PC">PC</option>
+                    </select>
+                    <div id="deviceError" class="alert alert-danger">Device is required.</div>
+                </div>
+                <button id="submitRun" class="btn btn-primary">Add Run</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Ensure all banners are hidden when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('successBanner').style.display = 'none';
+            document.getElementById('errorBanner').style.display = 'none';
+        });
+
+        document.getElementById('submitRun').addEventListener('click', async () => {
+            // Hide all error banners initially
+            document.querySelectorAll('.alert-danger').forEach(banner => banner.style.display = 'none');
+
+            // Collect data manually
+            const runData = {
+                game: document.getElementById('game').value.trim(),
+                monster_id: document.getElementById('monster_id').value.trim(),
+                username: document.getElementById('username').value.trim(),
+                weapon: document.getElementById('weapon').value,
+                time: document.getElementById('time').value.trim(),
+                rules: document.getElementById('rules').value,
+                device: document.getElementById('device').value
+            };
+
+            let hasErrors = false;
+
+            // Validate required fields and show individual error banners
+            if (!runData.game) {
+                document.getElementById('gameError').style.display = 'block';
+                hasErrors = true;
+            }
+            if (!runData.monster_id) {
+                document.getElementById('monsterIdError').style.display = 'block';
+                hasErrors = true;
+            }
+            if (!runData.username) {
+                document.getElementById('usernameError').style.display = 'block';
+                hasErrors = true;
+            }
+            if (!runData.weapon) {
+                document.getElementById('weaponError').style.display = 'block';
+                hasErrors = true;
+            }
+            if (!runData.time || !/^\d{2}:\d{2}:\d{2}$/.test(runData.time)) {
+                document.getElementById('timeError').style.display = 'block';
+                hasErrors = true;
+            }
+            if (!runData.rules) {
+                document.getElementById('rulesError').style.display = 'block';
+                hasErrors = true;
+            }
+            if (!runData.device) {
+                document.getElementById('deviceError').style.display = 'block';
+                hasErrors = true;
+            }
+
+            if (hasErrors) {
+                document.getElementById('errorBanner').style.display = 'block';
+                return; // Stop further execution if there are validation errors
+            }
+
+            try {
+                const response = await fetch('http://localhost/monster/runs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(runData)
+                });
+
+                if (response.ok) {
+                    document.getElementById('successBanner').style.display = 'block';
+                    // Clear inputs
+                    document.querySelectorAll('#addRunContainer input, #addRunContainer select').forEach(input => input.value = '');
+                } else {
+                    const error = await response.json();
+                    document.getElementById('errorBanner').style.display = 'block';
+                    alert(`Error: ${error.message}`);
+                }
+            } catch (error) {
+                console.error('Error adding run:', error);
+                document.getElementById('errorBanner').style.display = 'block';
+                alert('An error occurred while adding the run.');
+            }
+        });
+    </script>
+</body>
+
+</html>

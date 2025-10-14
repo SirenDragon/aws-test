@@ -1,0 +1,407 @@
+/* Define color variables in the root */
+:root {
+    --primary-color: #008b8b; /* Dark Teal */
+    --secondary-color: #ffb347; /* Orangy Gold */
+    --background-color: #121212; /* Dark background */
+    --text-color: #ffe5c5; /* Light gray text */
+    --danger-color: #CF6679; /* Red accent */
+    --success-color: #03DAC6; /* Teal success */
+    --light-color: #FFFFFF; /* White */
+    --dark-color: #1F1F1F; /* Slightly lighter dark gray */
+    --navbar-color: #1F1F1F; /* Navbar background */
+    --table-bg-color: #1A1A1A; /* Darker table background */
+    --table-header-bg-color: #2E2E2E; /* Darker header background */
+    --table-hover-bg-color: #2E2E2E; /* Table row hover background */
+    --table-border-color: #ffb347; /* Orangy Gold for table borders */
+    --danger-hover-color: #B00020; /* Darker red for hover */
+    --teal-hover-color: #003333; /* Slightly darker teal for hover */
+    --box-shadow-color: rgba(0, 0, 0, 0.5); /* Box shadow color */
+}
+
+/* Import the custom font */
+@font-face {
+    font-family: 'MonsterHunterFont'; /* Name of the font */
+    src: url('fonts/VTCGoblinHand.ttf') format('truetype'); /* Path to the font file and format */
+    font-weight: normal; /* Optional: Specify font weight */
+    font-style: normal; /* Optional: Specify font style */
+}
+
+.MonsterHunterFont {
+    font-family: 'MonsterHunterFont', sans-serif; /* Use the custom font */
+}
+
+/* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color); /* Dark background */
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    position: relative; /* Required for the pseudo-element */
+    overflow: auto; /* Allow scrolling */
+}
+
+
+    body::before {
+        content: ''; /* Required for the pseudo-element */
+        position: fixed; /* Make the background image fixed */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('images/texture.png'); /* Path to your texture image */
+        background-repeat: no-repeat; /* Prevent the image from repeating */
+        background-size: cover; /* Scale the image to cover the entire screen */
+        background-position: center; /* Center the image on the screen */
+        opacity: 0.5; /* Adjust the transparency of the image */
+        z-index: -1; /* Place the pseudo-element behind the content */
+    }
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--light-color);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: var(--secondary-color);
+        text-decoration: underline;
+    }
+
+button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+    button:hover {
+        transform: scale(1.05); /* Slightly enlarge the button */
+        transition: transform 0.2s ease-in-out; /* Smooth transition */
+        box-shadow: 0 0 10px var(--primary-color);
+    }
+
+    button.btn-primary {
+        background-color: var(--primary-color);
+        color: var(--light-color);
+    }
+
+        button.btn-primary:hover {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+
+    button.btn-danger {
+        background-color: var(--danger-color);
+        color: var(--light-color);
+    }
+
+        button.btn-danger:hover {
+            background-color: var(--danger-hover-color); /* Use root variable */
+        }
+
+    button.btn-secondary {
+        background-color: var(--secondary-color);
+        color: var(--dark-color);
+    }
+
+        button.btn-secondary:hover {
+            background-color: var(--teal-hover-color); /* Use root variable */
+        }
+
+/* Navbar styles */
+.navbar {
+    background-color: var(--navbar-color) !important; /* Force your custom color */
+    color: var(--light-color);
+    box-shadow: 0 4px 8px var(--box-shadow-color);
+}
+
+    .navbar a {
+        color: var(--text-color);
+    }
+
+        .navbar a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+            transition: text-decoration 0.2s ease-in-out;
+        }
+
+    /* Ensure active navbar links match the rest of the links */
+    .navbar .nav-link.active {
+        background-color: transparent; 
+        color: var(--primary-color); 
+        font-weight: bold; /* Optional: Make the active link bold */
+    }
+
+        .navbar .nav-link.active:hover {
+            color: var(--secondary-color); 
+        }
+
+.navbar-toggler:active {
+    animation: shimmy 0.3s ease-in-out;
+}
+
+/* Style the navbar brand */
+.navbar-brand {
+    color: var(--text-color); /* White text */
+    font-size: 1.5rem; /* Slightly larger font size */
+    font-weight: bold; /* Make it bold */
+    text-shadow: 0 2px 4px var(--box-shadow-color); /* Add a subtle glow */
+    cursor: default; /* Prevent pointer cursor since it's not a link */
+}
+    /* Optional: Add hover effect for consistency */
+    .navbar-brand:hover {
+        color: var(--text-color); /* Orangy gold on hover */
+    }
+
+/* Form styles */
+form {
+    background-color: var(--dark-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--box-shadow-color); /* Use root variable */
+}
+
+label {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+input, select {
+    background-color: var(--background-color) !important; 
+    color: var(--text-color) !important; 
+    border: 1px solid var(--primary-color) !important; 
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+    input:focus, select:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 0 3pt var(--primary-color); /* No blur, sharp outline */
+    }
+
+/* Table styles */
+.table {
+    background-color: var(--table-bg-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px var(--box-shadow-color); /* Add a subtle shadow */
+}
+
+    .table th {
+        background-color: var(--table-header-bg-color); 
+        color: var(--secondary-color);
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .table td {
+        background-color: var(--table-bg-color); 
+        color: var(--text-color); 
+        text-align: center;
+        padding: 0.5rem;
+        border-top: 1px solid var(--table-border-color); /* Add subtle row separation */
+    }
+
+        .table td:hover {
+            background-color: var(--teal-hover-color); /* Orangy gold */
+            color: var(--success-color); /* Dark text */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+.table-responsive {
+    margin-top: 1rem;
+}
+
+/* Success and error banners */
+.alert-success {
+    background-color: var(--success-color);
+    color: var(--dark-color);
+    padding: 0.75rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.alert-danger {
+    background-color: var(--danger-color);
+    color: var(--light-color);
+    padding: 0.75rem;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 5px;
+    text-align: center;
+    display: none; /* Hidden by default */
+}
+
+input:focus, select:focus {
+    border-color: var(--secondary-color) !important;
+    box-shadow: 0 0 0 3pt var(--secondary-color) !important; /* No blur, sharp outline */
+    outline: none !important;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Style the hamburger button */
+.navbar-toggler {
+    background-color: var(--background-color); /* Dark teal background */
+    border: 1px solid var(--secondary-color); /* Orangy gold border */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+
+/* Style the hamburger icon */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23ffb347' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    /* Orangy gold lines */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.alert-success, .alert-danger {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Define the shimmy animation */
+@keyframes shimmy {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.table td {
+    animation: slideIn 0.5s ease-in-out;
+}
+
+/* Apply a custom cursor globally */
+body {
+    cursor: url('Cursor/1-Normal-Select.png'), auto;
+}
+
+/* Scrollbar styles for WebKit-based browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+    width: 12px; /* Width of the vertical scrollbar */
+    height: 12px; /* Height of the horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-color); /* Dark background for the track */
+    border-radius: 10px; /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color); /* Dark teal for the thumb */
+    border-radius: 10px; /* Rounded corners */
+    border: 2px solid var(--dark-color); /* Adds padding around the thumb */
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-color); /* Orangy gold on hover */
+    }
+
+/* Scrollbar styles for Firefox */
+* {
+    scrollbar-width: thin; /* Makes the scrollbar thinner */
+    scrollbar-color: var(--primary-color) var(--dark-color); /* Thumb and track colors */
+}
+
+/* Card styling for the delete page */
+.card {
+    border-radius: 10px;
+    background-color: var(--dark-color); /* Use the dark theme color */
+    color: var(--text-color); /* Use the light text color */
+    border: 1px solid var(--primary-color); /* Add a subtle border */
+}
+
+    /* Styling for the delete page heading */
+    .card h2 {
+        font-weight: bold;
+        text-shadow: 0 2px 4px var(--box-shadow-color); /* Add a subtle glow */
+    }
+
+/* Styling for the run details */
+#runDetails {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color)!important;
+}
+
+/* Button alignment and spacing */
+#actionButtons button {
+    width: 150px; /* Make buttons uniform in size */
+    transition: transform 0.2s ease-in-out; /* Add a hover effect */
+}
+
+    #actionButtons button:hover {
+        transform: scale(1.05); /* Slightly enlarge buttons on hover */
+    }
+
+/* Ensure the image doesn't affect the title's alignment */
+.add-run-image {
+    max-height: 150px; /* Set a maximum height for the image */
+    width: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image fits within its container */
+}
+
+/* Optional: Add spacing between the title and the image */
+.d-flex.justify-content-between {
+    gap: 1rem; /* Adjust spacing as needed */
+}
+
+/* Style for the image next to the "Add a New Run" heading */
+.add-run-image {
+    width: auto; /* Adjust the size of the image */
+    height: 150px; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image fits within its dimensions */
+    transition: transform 0.3s ease; /* Optional: Add a hover effect */
+}
+
+    /* Optional: Add a hover effect to enlarge the image */
+    .add-run-image:hover {
+        transform: scale(1.1); /* Slightly enlarge the image on hover */
+    }
+
+.flush {
+    align-self: flex-end; /* Align the heading to the bottom of the container */
+}

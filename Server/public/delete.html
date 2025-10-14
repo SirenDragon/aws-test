@@ -1,0 +1,112 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Delete Run</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand MonsterHunterFont">Monster Hunts</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add.html">Add New Run</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4">
+            <h2 class="text-center text-danger MonsterHunterFont">Delete Run?</h2>
+            <hr />
+            <p id="runDetails" class="text-center text-muted">Loading run details...</p>
+            <div id="actionButtons" class="d-flex justify-content-center gap-3 mt-4" style="display: none;">
+                <button id="deleteButton" class="btn btn-danger btn-lg">Delete</button>
+                <button id="cancelButton" class="btn btn-secondary btn-lg">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3 text-center">
+        <img src="styles/images/palumu.gif" alt="Delete Warning" class="img-fluid" style="max-height: 200px; object-fit: contain;">
+    </div>
+
+
+    <script>
+        // Get the ID from the URL query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const runId = urlParams.get('id');
+
+        // Fetch the data for the specific run
+        async function fetchRunData() {
+            try {
+                const response = await fetch(`http://localhost/monster/runs/${runId}`);
+                if (response.ok) {
+                    const runData = await response.json();
+                    document.getElementById('runDetails').innerHTML = `
+                                <strong>Game:</strong> ${runData.game}<br>
+                                <strong>Monster:</strong> ${runData.monster_id}<br>
+                                <strong>Username:</strong> ${runData.username}<br>
+                                <strong>Weapon:</strong> ${runData.weapon}<br>
+                                <strong>Time:</strong> ${runData.time}<br>
+                                <strong>Rules:</strong> ${runData.rules}<br>
+                                <strong>Device:</strong> ${runData.device}
+                            `;
+                    document.getElementById('actionButtons').style.display = 'block';
+                } else {
+                    document.getElementById('runDetails').innerHTML = 'Failed to load run details.';
+                }
+            } catch (error) {
+                console.error('Error fetching run data:', error);
+                document.getElementById('runDetails').innerHTML = 'An error occurred while loading run details.';
+            }
+        }
+
+        // Call the function to fetch data when the page loads
+        fetchRunData();
+
+        // Handle the delete button click
+        document.getElementById('deleteButton').addEventListener('click', async () => {
+            if (window.confirm('Are you sure you want to delete this run?')) {
+                try {
+                    const response = await fetch(`http://localhost/monster/runs/${runId}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (response.ok) {
+                        alert('Run successfully deleted!');
+                        window.location.href = 'index.html'; // Redirect to the main page
+                    } else {
+                        alert('Failed to delete the run.');
+                    }
+                } catch (error) {
+                    console.error('Error deleting run:', error);
+                    alert('An error occurred while deleting the run.');
+                }
+            }
+        });
+
+        // Handle the cancel button click
+        document.getElementById('cancelButton').addEventListener('click', () => {
+            window.location.href = 'index.html'; // Redirect to the main page
+        });</script>
+</body>
+
+</html>
