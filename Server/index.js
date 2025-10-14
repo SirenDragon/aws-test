@@ -13,7 +13,7 @@ app.use(express.json()); //not sure about this one
 
 
 const upload = multer()
-const port = 80 //Default port to http server
+const port = 3000 //Default port to http server
 
 //The * in app.* needs to match the method type of the request
 app.get(
@@ -152,4 +152,5 @@ app.delete('/monster/runs/:id', async (request, response) => {
 
 app.listen(port, () => {
     console.log(`Application listening at http://localhost:${port}`);
+
 })
