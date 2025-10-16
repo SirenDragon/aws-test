@@ -57,7 +57,7 @@
         // Fetch the data for the specific run
         async function fetchRunData() {
             try {
-                const response = await fetch(`http://localhost/monster/runs/${runId}`);
+                const response = await fetch(`monster/runs/${runId}`);
                 if (response.ok) {
                     const runData = await response.json();
                     document.getElementById('runDetails').innerHTML = `
@@ -86,7 +86,7 @@
         document.getElementById('deleteButton').addEventListener('click', async () => {
             if (window.confirm('Are you sure you want to delete this run?')) {
                 try {
-                    const response = await fetch(`http://localhost/monster/runs/${runId}`, {
+                    const response = await fetch(`monster/runs/${runId}`, {
                         method: 'DELETE'
                     });
 
