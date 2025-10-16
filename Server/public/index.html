@@ -158,7 +158,7 @@
 
         // Define fetchMonsterDetails globally
         function fetchMonsterDetails(monsterName) {
-            fetch(`http://localhost/monster/details?monster_id=${encodeURIComponent(monsterName)}`)
+            fetch(`monster/details?monster_id=${encodeURIComponent(monsterName)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.data) {
@@ -212,7 +212,7 @@
             };
 
             //Send FETCH API request
-            fetch("http://localhost/monster/" + (!isEmpty(getParameters) ? '?' + new URLSearchParams(getParameters) : ''), fetchSettings)
+            fetch("monster/" + (!isEmpty(getParameters) ? '?' + new URLSearchParams(getParameters) : ''), fetchSettings)
                 .then((response) => {
                     return new Promise((resolve) => response.json()
                         .then((json) => resolve({
