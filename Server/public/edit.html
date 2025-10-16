@@ -113,7 +113,7 @@
         // Fetch the data for the specific run
         async function fetchRunData() {
             try {
-                const response = await fetch(`http://localhost/monster/runs/${runId}`);
+                const response = await fetch(`monster/runs/${runId}`);
                 if (response.ok) {
                     const runData = await response.json();
                     // Populate the form fields
@@ -182,7 +182,7 @@
             }
 
             try {
-                const response = await fetch(`http://localhost/monster/runs/${runId}`, {
+                const response = await fetch(`monster/runs/${runId}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(runData)
