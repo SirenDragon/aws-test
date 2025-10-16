@@ -151,7 +151,8 @@ app.delete('/monster/runs/:id', async (request, response) => {
 
 
 app.listen(port, () => {
-    console.log(`Application listening at http://${port}`);
+    console.log(`Application listening at http://localhost:${port}`);
 
 })
+
 
