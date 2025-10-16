@@ -171,7 +171,7 @@
             }
 
             try {
-                const response = await fetch('http://localhost/monster/runs', {
+                const response = await fetch('monster/runs', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(runData)
